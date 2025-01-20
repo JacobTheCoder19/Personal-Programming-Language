@@ -1,4 +1,4 @@
-# Created by Jacob Graham in the class's second lecture on Wednesday 01/15/2025 
+# Created by Jacob Graham in the second lecture of the class on Wednesday 01/15/2025 
 def eval(s):
     for c in s:
         assert c in "-0123456789."
