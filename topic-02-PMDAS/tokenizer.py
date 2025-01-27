@@ -2,7 +2,6 @@ import re
 
 # Define patterns for tokens
 patterns = [
-    # * is 0 or more and + is 1 and more and byitself is 1
     [r"\d+", "number"],
     [r"\+", "+"],
     [r"\-", "-"],
@@ -10,12 +9,12 @@ patterns = [
     [r"\/", "/"],
     [r"\(", "("],
     [r"\)", ")"],
-    [r"\s+)", "whitespace"],
-    [r".", "error"],
+    [r"\s+","whitespace"],
+    [r".","error"]
 ]
 
 for pattern in patterns:
-    pattern[0] = re.compile(pattern[0])
+    pattern[0] = re.compile(pattern[0]) 
 
 def tokenize(characters):
     tokens = []
@@ -51,7 +50,7 @@ def test_simple_token():
     print("test simple token")
     examples = "+-*/()"
     for example in examples:
-        t = tokenize(example)
+        t = tokenize(example)[0]
         assert t["tag"] == example
         assert t["position"] == 0
         assert t["value"] == example
@@ -63,19 +62,16 @@ def test_number_token():
         assert len(t) == 2
         assert t[0]["tag"] == "number"
         assert t[0]["value"] == int(s)
-
+    
 def test_multiple_tokens():
-    print("testing multiple tokens")
+    print("test multiple tokens")
     tokens = tokenize("1+2")
-    assert tokens = [{'tag': 'number', 'position': 0, 'value':1},
-                     {'tag': '+', 'position': 2, 'value': '+'}, {}]
-    print(tokens)
-    exit(0)
+    assert tokens == [{'tag': 'number', 'position': 0, 'value': 1}, {'tag': '+', 'position': 1, 'value': '+'}, {'tag': 'number', 'position': 2, 'value': 2}, {'tag': None, 'value': None, 'position': 3}]
 
 def test_whitespace():
-    print("test white space")
+    print("test whitespace")
     tokens = tokenize("1 + 2")
-    assert tokens == [{'tag': 'number',}]
+    assert tokens == [{'tag': 'number', 'position': 0, 'value': 1}, {'tag': '+', 'position': 2, 'value': '+'}, {'tag': 'number', 'position': 4, 'value': 2}, {'tag': None, 'value': None, 'position': 5}]
 
 def test_error():
     print("test error")
