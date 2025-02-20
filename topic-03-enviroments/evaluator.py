@@ -73,7 +73,7 @@ def test_evaluate_division():
         "right":{"tag":"number","value":2}
         }
     assert evaluate(ast) == 2
-
+#This is where everything is called and ran. Start here to better understand the whole parser, tokenizer, and evaluator!
 def eval(s, environment={}):
     tokens = tokenize(s)
     ast = parse(tokens)
