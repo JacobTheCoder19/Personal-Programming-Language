@@ -173,10 +173,9 @@ def parse_statement(tokens):
     """
     statement = <print> expression | expression
     """
-    if tokens[0]["tag"] == "print":
+    if tokens[0]["tag"] == "show":
         value_ast, tokens = parse_expression(tokens[1:])
-        ast = {"tag": "print", "value": value_ast}
-
+        ast = {"tag": "show", "value": value_ast}
     else:
         ast, tokens = parse_expression(tokens)
     return ast, tokens
@@ -202,10 +201,10 @@ def test_parse_statement():
             "right": {"tag": "number", "value": 4},
         },
     }
-    tokens = tokenize("print 2*4")
+    tokens = tokenize("show 2*4")
     ast, tokens = parse_statement(tokens)
     assert ast == {
-        "tag": "print",
+        "tag": "show",
         "value": {
             "tag": "*",
             "left": {"tag": "number", "value": 2},
