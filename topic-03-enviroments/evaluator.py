@@ -106,7 +106,7 @@ def test_evaluate_print():
     assert eval("print 3.14") == None    
     assert printed_string == "3.14"
 
-
+#This is what is ran when the program is ran 
 if __name__ == "__main__":
     test_evaluate_number()
     test_evaluate_addition()
