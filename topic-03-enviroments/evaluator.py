@@ -5,7 +5,7 @@ printed_string = None
 
 def evaluate(ast, environment={}):
     global printed_string
-    if ast["tag"] == "show":
+    if ast["tag"] == "display":
         value = evaluate(ast["value"])
         s = str(value)
         print(s)
@@ -101,9 +101,9 @@ def test_evaluate_identifier():
 
 def test_evaluate_print():
     print("testing evaluate print")
-    assert eval("show 3") == None    
+    assert eval("display 3") == None    
     assert printed_string == "3"
-    assert eval("show 3.14") == None    
+    assert eval("display 3.14") == None    
     assert printed_string == "3.14"
 
 #This is what is ran when the program is ran 
