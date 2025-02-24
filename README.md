@@ -9,7 +9,7 @@
 </div>
 <div>
   🟩 <strong>Print Output</strong><br>
-  &emsp;🔸 Users can display output to the console using the `show` command, making it easy to see results.<br><br>
+  &emsp;🔸 Users can display output to the console using the `display` command, making it easy to see results.<br><br>
 </div>
 <div>
   🟩 <strong>Recursive Descent Parsing</strong><br>
