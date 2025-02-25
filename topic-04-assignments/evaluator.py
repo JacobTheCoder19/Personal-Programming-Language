@@ -5,12 +5,25 @@ printed_string = None
 
 def evaluate(ast, environment={}):
     global printed_string
+    if ast["tag"] == "program":
+        last_value = None
+        for statement in ast["statements"]:
+            value = evaluate(statement, environment)
+            last_value = value
+        return last_value
     if ast["tag"] == "print":
         value = evaluate(ast["value"])
         s = str(value)
         print(s)
         printed_string = s
         return None
+    if ast["tag"] == "assign":
+        target = ast["target"]
+        assert target["tag"] == "identifier"
+        identifier = target["value"]
+        assert type(identifier) is str
+        value = evaluate(ast["value"],environment)
+        environment[identifier] = value
     if ast["tag"] == "number":
         return ast["value"]
     if ast["tag"] == "identifier":
@@ -106,6 +119,11 @@ def test_evaluate_print():
     assert eval("print 3.14") == None    
     assert printed_string == "3.14"
 
+def test_evaluate_assignment():
+    print("testing evaluate assignment")
+    env = {"x":4,"y":5}
+    assert eval("x=7",env) == 7
+    assert env["x"] == 7
 
 if __name__ == "__main__":
     test_evaluate_number()
