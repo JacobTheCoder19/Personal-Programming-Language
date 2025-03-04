@@ -27,8 +27,8 @@
 
 &emsp;The Matrix programming language is designed to be simple and user-friendly. Users can write code in a text file with a `.jg` extension, using a straightforward syntax that includes arithmetic operations and output commands. 
 
-&emsp;To execute a program, users run the `matrix` script from the command line, passing the filename as an argument (e.g., `./matrix test.jg`). The interpreter reads the code, tokenizes it, parses it into an Abstract Syntax Tree (AST) using recursive descent parsing, and evaluates the expressions to produce output.
+&emsp;To execute a program, users run the `Matrix` script from the command line, passing the filename as an argument (e.g., `./Matrix test.jg`). The interpreter reads the code, tokenizes it, parses it into an Abstract Syntax Tree (AST) using recursive descent parsing, and evaluates the expressions to produce output.
 
-&emsp;To run the language so your terminal accepts it, first make it an executable by doing "chmod +x matrix". Then you should be able to do "./matrix FILENAME.jg" to run your program
+&emsp;To run the language so your terminal accepts it, first make it an executable by doing "chmod +x Matrix". Then you should be able to do "./Matrix FILENAME.jg" to run your program
 
 &emsp;Error handling is built into the interpreter, providing users with feedback on syntax errors or runtime issues, which helps them learn and debug their code effectively. Overall, Matrix is a simple yet powerful tool for anyone looking to explore the world of programming.
