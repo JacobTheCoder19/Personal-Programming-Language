@@ -29,6 +29,6 @@
 
 &emsp;To execute a program, users run the `matrix` script from the command line, passing the filename as an argument (e.g., `./matrix test.jg`). The interpreter reads the code, tokenizes it, parses it into an Abstract Syntax Tree (AST) using recursive descent parsing, and evaluates the expressions to produce output.
 
-&emsp;The language supports basic features such as arithmetic operations, allowing users to perform calculations. The `display` command is used to print output to the console, making it easy to see the results of computations.
+&emsp;To run the language so your terminal accepts it, first make it an executable by doing "chmod +x matrix". Then you should be able to do "./matrix FILENAME.jg" to run your program
 
 &emsp;Error handling is built into the interpreter, providing users with feedback on syntax errors or runtime issues, which helps them learn and debug their code effectively. Overall, Matrix is a simple yet powerful tool for anyone looking to explore the world of programming.
