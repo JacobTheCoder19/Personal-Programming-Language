@@ -437,7 +437,7 @@ def parse_statement(tokens):
     #     return parse_function_statement(tokens)
     # if tag == "return":
     #     return parse_return_statement(tokens)
-    if tag == "print":
+    if tag == "display":
         return parse_print_statement(tokens)
     return parse_assignment_statement(tokens)
 
@@ -465,8 +465,8 @@ def test_parse_statement():
     # )
     # print statement
     assert (
-        parse_statement(tokenize("print 1"))[0]
-        == parse_print_statement(tokenize("print 1"))[0]
+        parse_statement(tokenize("display 1"))[0]
+        == parse_print_statement(tokenize("display 1"))[0]
     )
     # # function_statement (syntactic sugar)
     # assert (
