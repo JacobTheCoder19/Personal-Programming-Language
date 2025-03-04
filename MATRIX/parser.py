@@ -369,31 +369,31 @@ def test_parse_statement_block():
 
 def parse_print_statement(tokens):
     """
-    print_statement = "print" [ expression ] ;
+    print_statement = "display" [ expression ] ;
     """
-    assert tokens[0]["tag"] == "print"
+    assert tokens[0]["tag"] == "display"
     tokens = tokens[1:]
     if tokens[0]["tag"] in ["}", ";", None]:
         # no expression
-        return {"tag": "print", "value": None}, tokens
+        return {"tag": "display", "value": None}, tokens
     else:
         value, tokens = parse_expression(tokens)
-        return {"tag": "print", "value": value}, tokens
+        return {"tag": "display", "value": value}, tokens
 
 
 def test_parse_print_statement():
     """
-    print_statement = "print" [ expression ] ;
+    print_statement = "display" [ expression ] ;
     """
     print("testing parse_print_statement...")
-    ast = parse_print_statement(tokenize("print 1"))[0]
-    assert ast == {"tag": "print", "value": {"tag": "number", "value": 1}}
+    ast = parse_print_statement(tokenize("display 1"))[0]
+    assert ast == {"tag": "display", "value": {"tag": "number", "value": 1}}
 
 def parse_if_statement():
     """
     if_statement = "if" "(" expression ")" statement_block [ statement_block ]
     """
-    TODO -- CONTINUE HERE
+   ## TO DO -- CONTINUE HERE
 
 def parse_assignment_statement(tokens):
     """

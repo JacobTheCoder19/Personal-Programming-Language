@@ -2,7 +2,7 @@ import re
 
 # Define patterns for tokens
 patterns = [
-    [r"print","print"],
+    [r"display","display"],
     [r"if","if"],
     [r"else","else"],
     [r"while","while"],
@@ -117,7 +117,7 @@ def test_whitespace():
 def test_keywords():
     print("test keywords...")
     for keyword in [
-        "print","if","else","while","continue","break","return","assert"
+        "display","if","else","while","continue","break","return","assert"
     ]:
         t = tokenize(keyword)
         assert len(t) == 2

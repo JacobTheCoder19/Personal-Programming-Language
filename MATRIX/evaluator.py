@@ -11,7 +11,7 @@ def evaluate(ast, environment={}):
             value = evaluate(statement, environment)
             last_value = value
         return last_value
-    if ast["tag"] == "print":
+    if ast["tag"] == "display":
         value = evaluate(ast["value"])
         s = str(value)
         print(s)
@@ -181,10 +181,10 @@ def test_evaluate_identifier():
     assert eval("x+y",{"$parent":{"x":4},"y":5}) == 9
 
 def test_evaluate_print():
-    print("testing evaluate print")
-    assert eval("print 3") == None    
+    print("testing evaluate display")
+    assert eval("display 3") == None    
     assert printed_string == "3"
-    assert eval("print 3.14") == None    
+    assert eval("display 3.14") == None    
     assert printed_string == "3.14"
 
 def test_evaluate_assignment():
