@@ -2,7 +2,14 @@ import re
 
 # Define patterns for tokens
 patterns = [
-    [r"display","display"],
+    [r"print","print"],
+    [r"if","if"],
+    [r"else","else"],
+    [r"while","while"],
+    [r"continue","continue"],
+    [r"break","break"],
+    [r"return","return"],
+    [r"assert","assert"],
     [r"\d*\.\d+|\d+\.\d*|\d+", "number"],
     [r"[a-zA-Z_][a-zA-Z0-9_]*", "identifier"],  # identifiers
     [r"\+", "+"],
@@ -11,6 +18,23 @@ patterns = [
     [r"\/", "/"],
     [r"\(", "("],
     [r"\)", ")"],
+    [r"\)", ")"],
+    [r"==", "=="],
+    [r"!=", "!="],
+    [r"<=", "<="],
+    [r">=", ">="],
+    [r"<", "<"],
+    [r">", ">"],
+    [r"\=", "="],
+    [r"\;", ";"],
+    [r"\&\&", "&&"],
+    [r"\|\|", "||"],
+    [r"\!", "!"],
+    [r"\{", "{"],
+    [r"\}", "}"],
+    [r"\[", "["],
+    [r"\]", "]"],
+    [r"\.", "."],
     [r"\s+","whitespace"],
     [r".","error"]
 ]
@@ -53,7 +77,13 @@ def tokenize(characters):
 
 def test_simple_token():
     print("test simple token")
-    examples = "+-*/()"
+    examples = "+-*/()=;<>{}[]."
+    for example in examples:
+        t = tokenize(example)[0]
+        assert t["tag"] == example
+        assert t["position"] == 0
+        assert t["value"] == example
+    examples = "==\t!=\t<=\t>=\t&&\t||\t!".split("\t")
     for example in examples:
         t = tokenize(example)[0]
         assert t["tag"] == example
@@ -87,7 +117,7 @@ def test_whitespace():
 def test_keywords():
     print("test keywords...")
     for keyword in [
-        "display",
+        "print","if","else","while","continue","break","return","assert"
     ]:
         t = tokenize(keyword)
         assert len(t) == 2

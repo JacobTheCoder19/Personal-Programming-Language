@@ -5,12 +5,25 @@ printed_string = None
 
 def evaluate(ast, environment={}):
     global printed_string
-    if ast["tag"] == "display":
+    if ast["tag"] == "program":
+        last_value = None
+        for statement in ast["statements"]:
+            value = evaluate(statement, environment)
+            last_value = value
+        return last_value
+    if ast["tag"] == "print":
         value = evaluate(ast["value"])
         s = str(value)
         print(s)
         printed_string = s
         return None
+    if ast["tag"] == "assign":
+        target = ast["target"]
+        assert target["tag"] == "identifier"
+        identifier = target["value"]
+        assert type(identifier) is str
+        value = evaluate(ast["value"],environment)
+        environment[identifier] = value
     if ast["tag"] == "number":
         return ast["value"]
     if ast["tag"] == "identifier":
@@ -33,6 +46,45 @@ def evaluate(ast, environment={}):
             return left_value * right_value
         if ast["tag"] == "/":
             return left_value / right_value
+    if ast["tag"] == "negate":
+        value = evaluate(ast["value"], environment)
+        return -value
+    if ast["tag"] == "&&":
+        left_value = evaluate(ast["left"], environment)
+        right_value = evaluate(ast["right"], environment)
+        return left_value and right_value
+    if ast["tag"] == "||":
+        left_value = evaluate(ast["left"], environment)
+        right_value = evaluate(ast["right"], environment)
+        return left_value or right_value
+    if ast["tag"] == "!":
+        value = evaluate(ast["value"], environment)
+        return not value
+    if ast["tag"] == "<":
+        left_value = evaluate(ast["left"], environment)
+        right_value = evaluate(ast["right"], environment)
+        return left_value < right_value
+    if ast["tag"] == ">":
+        left_value = evaluate(ast["left"], environment)
+        right_value = evaluate(ast["right"], environment)
+        return left_value > right_value
+    if ast["tag"] == "<=":
+        left_value = evaluate(ast["left"], environment)
+        right_value = evaluate(ast["right"], environment)
+        return left_value <= right_value
+    if ast["tag"] == ">=":
+        left_value = evaluate(ast["left"], environment)
+        right_value = evaluate(ast["right"], environment)
+        return left_value >= right_value
+    if ast["tag"] == "==":
+        left_value = evaluate(ast["left"], environment)
+        right_value = evaluate(ast["right"], environment)
+        return left_value == right_value
+    if ast["tag"] == "!=":
+        left_value = evaluate(ast["left"], environment)
+        right_value = evaluate(ast["right"], environment)
+        return left_value != right_value
+
 
 def test_evaluate_number():
     print("testing evaluate number")
@@ -73,7 +125,7 @@ def test_evaluate_division():
         "right":{"tag":"number","value":2}
         }
     assert evaluate(ast) == 2
-#This is where everything is called and ran. Start here to better understand the whole parser, tokenizer, and evaluator!
+
 def eval(s, environment={}):
     tokens = tokenize(s)
     ast = parse(tokens)
@@ -86,6 +138,35 @@ def test_evaluate_expression():
     assert eval("1+2*3") == 7
     assert eval("(1+2)*3") == 9
     assert eval("(1.0+2.1)*3") == 9.3
+    assert eval("1<2") == True
+    assert eval("2<1") == False
+    assert eval("2>1") == True
+    assert eval("1>2") == False
+    assert eval("1<=2") == True
+    assert eval("2<=2") == True
+    assert eval("2<=1") == False
+    assert eval("2>=1") == True
+    assert eval("2>=2") == True
+    assert eval("1>=2") == False
+    assert eval("2==2") == True
+    assert eval("1==2") == False
+    assert eval("2!=1") == True
+    assert eval("1!=1") == False
+    # tokens = tokenize("-1")
+    # ast = parse(tokens)
+    # result = evaluate(ast, {})
+    # print(ast, result)
+    # exit(0)
+
+    assert eval("-1") == -1
+    assert eval("-(1)") == -1
+    assert eval("!1") == False
+    assert eval("!0") == True
+    assert eval("0&&1") == False
+    assert eval("1&&1") == True
+    assert eval("1||1") == True
+    assert eval("0||1") == True
+    assert eval("0||0") == False
 
 
 def test_evaluate_identifier():
@@ -101,12 +182,17 @@ def test_evaluate_identifier():
 
 def test_evaluate_print():
     print("testing evaluate print")
-    assert eval("display 3") == None    
+    assert eval("print 3") == None    
     assert printed_string == "3"
-    assert eval("display 3.14") == None    
+    assert eval("print 3.14") == None    
     assert printed_string == "3.14"
 
-#This is what is ran when the program is ran 
+def test_evaluate_assignment():
+    print("testing evaluate assignment")
+    env = {"x":4,"y":5}
+    assert eval("x=7",env) == 7
+    assert env["x"] == 7
+
 if __name__ == "__main__":
     test_evaluate_number()
     test_evaluate_addition()
