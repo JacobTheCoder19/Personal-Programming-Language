@@ -41,6 +41,8 @@ def parse_factor(tokens):
     if token["tag"] == "-":
         ast, tokens = parse_expression(tokens[1:])
         return {"tag": "negate", "value": ast}, tokens
+    if token["tag"] == "Neo":
+        return {"tag": "Bool", "value": "True"}, tokens[1:]
     raise Exception(
         f"Unexpected token '{token['tag']}' at position {token['position']}."
     )

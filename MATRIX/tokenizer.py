@@ -10,6 +10,7 @@ patterns = [
     [r"break","break"],
     [r"return","return"],
     [r"assert","assert"],
+    [r"Neo","Neo"],
     [r"\d*\.\d+|\d+\.\d*|\d+", "number"],
     [r"[a-zA-Z_][a-zA-Z0-9_]*", "identifier"],  # identifiers
     [r"\+", "+"],
@@ -117,7 +118,7 @@ def test_whitespace():
 def test_keywords():
     print("test keywords...")
     for keyword in [
-        "display","if","else","while","continue","break","return","assert"
+        "display","if","else","while","continue","break","return","assert","Neo"
     ]:
         t = tokenize(keyword)
         assert len(t) == 2

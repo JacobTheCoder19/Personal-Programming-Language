@@ -84,6 +84,8 @@ def evaluate(ast, environment={}):
         left_value = evaluate(ast["left"], environment)
         right_value = evaluate(ast["right"], environment)
         return left_value != right_value
+    if ast["tag"] == "Bool":
+        return ast["value"]
 
 
 def test_evaluate_number():
