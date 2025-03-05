@@ -29,6 +29,8 @@
 
 &emsp;To execute a program, users run the `Matrix` script from the command line, passing the filename as an argument (e.g., `./Matrix test.jg`). The interpreter reads the code, tokenizes it, parses it into an Abstract Syntax Tree (AST) using recursive descent parsing, and evaluates the expressions to produce output.
 
-&emsp;To run the language so your terminal accepts it, first make it an executable by doing "chmod +x Matrix". Then you should be able to do "./Matrix FILENAME.jg" to run your program
+&emsp;To run the language so your terminal accepts it, first make it an executable by doing "chmod +x Matrix". Then you should be able to do "./Matrix FILENAME.jg" to run your program 
+
+&emsp;Also, The ";" is a statement separator and not a statement terminator. That way the user doesn't need one on the last line of code. Think of it like when using numbers or variables in an array [1,2,3,4] You don't have a "," at the end because it is a statement seperator and not a statement terminator. My language follows the same principle but with the ";" because it makes more sense to me and makes it easier to not forget a semicolon when I think of them as just seperating statements.
 
 &emsp;Error handling is built into the interpreter, providing users with feedback on syntax errors or runtime issues, which helps them learn and debug their code effectively. Overall, Matrix is a simple yet powerful tool for anyone looking to explore the world of programming.
