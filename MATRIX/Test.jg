@@ -6,4 +6,6 @@ x=4;
 y=5;
 display x+y;
 J = Neo;
-display J
+display J;
+G = Smith;
+display G
